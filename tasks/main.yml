@@ -1,0 +1,77 @@
+---
+- name: "Install packages"
+  ansible.builtin.package:
+    update_cache: true
+    name:
+      - unattended-upgrades
+
+- name: "Create Unattended-Upgrades files"
+  block:
+    - name: "Check Unattended-Upgrades file 50unattended-upgrades exists"
+      register: file_check
+      ansible.builtin.stat:
+        path: "/etc/apt/apt.conf.d/50unattended-upgrades"
+
+    - name: "Create Unattended-Upgrades configuration files"
+      when: not file_check.stat.exists 
+      ansible.builtin.file:
+        path: "/etc/apt/apt.conf.d/50unattended-upgrades"
+        state: touch
+        owner: "root"
+        group: "root"
+        mode: 0600
+
+    - name: "Check Unattended-Upgrades file 20auto-upgrades exists"
+      register: file_check
+      failed_when: not file_check.stat.exists
+      ansible.builtin.stat:
+        path: "/etc/apt/apt.conf.d/20auto-upgrades"
+
+    - name: "Create Unattended-Upgrades configuration files"
+      when: not file_check.stat.exists 
+      ansible.builtin.file:
+        path: "/etc/apt/apt.conf.d/20auto-upgrades"
+        state: touch
+        owner: "root"
+        group: "root"
+        mode: 0600
+
+- name: "Configure file: 50unattended-upgrades"
+  block:
+    - name: "Configure Unattended-Upgrades to run updates or not at reboot"
+      ansible.builtin.lineinfile:
+        path: "/etc/apt/apt.conf.d/50unattended-upgrades"
+        line: "Unattended-Upgrade::Automatic-Reboot \"{{ unattended_upgrades_automatic_reboot }}\";"
+        state: present
+
+    - name: "Configure updates runs at {{ unattended_upgrades_automatic_reboot_time }} AM"
+      ansible.builtin.lineinfile:
+        path: "/etc/apt/apt.conf.d/50unattended-upgrades"
+        line: "Unattended-Upgrade::Automatic-Reboot-Time \"{{ unattended_upgrades_automatic_reboot_time }}\";"
+        state: present
+
+    - name: "Configure email address for notifications"
+      ansible.builtin.lineinfile:
+        dest: "/etc/apt/apt.conf.d/50unattended-upgrades"
+        line: "Unattended-Upgrade::Mail \"{{ unattended_upgrades_report_email_address }}\";"
+        state: present
+
+- name: "Configure file: 20auto-upgrades"
+  block:
+    - name: "Enable Unattended-Upgrades"
+      ansible.builtin.lineinfile:
+        path: "/etc/apt/apt.conf.d/20auto-upgrades"
+        line: "APT::Periodic::Unattended-Upgrade \"1\";"
+        state: present
+
+    - name: "Set automatic reboot"
+      ansible.builtin.lineinfile:
+        path: "/etc/apt/apt.conf.d/20auto-upgrades"
+        line: "APT::Periodic::Automatic-Reboot \"{{ unattended_upgrades_automatic_reboot }}\";"
+        state: present
+
+    - name: "Set automatic reboot time"
+      ansible.builtin.lineinfile:
+        path: "/etc/apt/apt.conf.d/20auto-upgrades"
+        line: "APT::Periodic::Automatic-Reboot-Time \"{{ unattended_upgrades_automatic_reboot_time }}\";"
+        state: present

@@ -1,0 +1,18 @@
+---
+# Don't forget to keep this file updated
+# molecule/<scenario>/verify.yml
+- name: "Verify"
+  hosts: "all"
+  gather_facts: false
+  tasks:
+
+    - name: "Check Unattended-Upgrades files"
+      loop:
+        - "/etc/apt/apt.conf.d/50unattended-upgrades"
+        - "/etc/apt/apt.conf.d/20auto-upgrades"
+      loop_control:
+        loop_var: file_path
+      register: file_check
+      failed_when: not file_check.stat.exists
+      ansible.builtin.stat:
+        path: "{{ file_path }}"
