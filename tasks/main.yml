@@ -3,7 +3,7 @@
   ansible.builtin.package:
     update_cache: true
     name:
-      - unattended-upgrades
+      - "unattended-upgrades"
 
 - name: "Create Unattended-Upgrades files"
   block:
@@ -19,7 +19,7 @@
         state: touch
         owner: "root"
         group: "root"
-        mode: 0600
+        mode: "0600"
 
     - name: "Check Unattended-Upgrades file 20auto-upgrades exists"
       register: file_check
@@ -34,7 +34,7 @@
         state: touch
         owner: "root"
         group: "root"
-        mode: 0600
+        mode: "0600"
 
 - name: "Configure file: 50unattended-upgrades"
   block:
