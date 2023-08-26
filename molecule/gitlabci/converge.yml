@@ -13,8 +13,8 @@
       tags:
         - "labocbz.install_unattended_upgrades"
       vars:
-        unattended_upgrades_automatic_reboot: "{{ inv_unattended_upgrades_automatic_reboot }}"
-        unattended_upgrades_automatic_reboot_time: "{{ inv_unattended_upgrades_automatic_reboot_time }}"
-        unattended_upgrades_report_email_address: "{{ inv_unattended_upgrades_report_email_address }}"
+        install_unattended_upgrades_automatic_reboot: "{{ inv_install_unattended_upgrades_automatic_reboot }}"
+        install_unattended_upgrades_automatic_reboot_time: "{{ inv_install_unattended_upgrades_automatic_reboot_time }}"
+        install_unattended_upgrades_report_email_address: "{{ inv_install_unattended_upgrades_report_email_address }}"
       ansible.builtin.include_role:
         name: "labocbz.install_unattended_upgrades"

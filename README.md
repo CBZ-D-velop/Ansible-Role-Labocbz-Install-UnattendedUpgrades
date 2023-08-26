@@ -17,13 +17,13 @@ An Ansible role to install an configure Unattended-upgrades on your host.
 
 The Ansible role for unattended upgrades installation automates the process of keeping your system up to date by applying critical and security updates without requiring manual intervention. This role utilizes a few variables to customize its behavior.
 
-By default, automatic reboot after updates is disabled, as indicated by the "unattended_upgrades_automatic_reboot" variable set to "false". This means that the system will not automatically restart after installing updates.
+By default, automatic reboot after updates is disabled, as indicated by the "install_unattended_upgrades_automatic_reboot" variable set to "false". This means that the system will not automatically restart after installing updates.
 
-If you want to enable automatic reboot, you can change the value of the "unattended_upgrades_automatic_reboot" variable to "true". However, be aware of the potential implications of automatic reboot in your environment.
+If you want to enable automatic reboot, you can change the value of the "install_unattended_upgrades_automatic_reboot" variable to "true". However, be aware of the potential implications of automatic reboot in your environment.
 
-Additionally, if you choose to enable automatic reboot, you can specify the time at which the reboot should occur using the "unattended_upgrades_automatic_reboot_time" variable. In this example, the time is set to "06:00", indicating that the system will automatically restart at 6 AM.
+Additionally, if you choose to enable automatic reboot, you can specify the time at which the reboot should occur using the "install_unattended_upgrades_automatic_reboot_time" variable. In this example, the time is set to "06:00", indicating that the system will automatically restart at 6 AM.
 
-To receive reports on the updates performed by the role, you can provide an email address in the "unattended_upgrades_report_email_address" variable. In this example, the configured email address is "your.address@domain.tld". You will receive email notifications containing information about the applied updates.
+To receive reports on the updates performed by the role, you can provide an email address in the "install_unattended_upgrades_report_email_address" variable. In this example, the configured email address is "your.address@domain.tld". You will receive email notifications containing information about the applied updates.
 
 By using this Ansible role for unattended upgrades installation, you can easily keep your system up to date and secure by automating the update process and customizing its behavior according to your requirements.
 
@@ -110,10 +110,10 @@ Some vars a required to run this role:
 
 ```YAML
 ---
-unattended_upgrades_automatic_reboot: false
-unattended_upgrades_automatic_reboot_time: "06:00"
+install_unattended_upgrades_automatic_reboot: false
+install_unattended_upgrades_automatic_reboot_time: "06:00"
 
-unattended_upgrades_report_email_address: "your.address@domain.tld"
+install_unattended_upgrades_report_email_address: "your.address@domain.tld"
 
 ```
 
@@ -126,10 +126,10 @@ In order to surchage vars, you have multiples possibilities but for mains cases 
 ```YAML
 # From inventory
 ---
-inv_unattended_upgrades_automatic_reboot: false
-inv_unattended_upgrades_automatic_reboot_time: "06:00"
+inv_install_unattended_upgrades_automatic_reboot: false
+inv_install_unattended_upgrades_automatic_reboot_time: "06:00"
 
-inv_unattended_upgrades_report_email_address: "my.address@domain.tld"
+inv_install_unattended_upgrades_report_email_address: "my.address@domain.tld"
 
 ```
 
@@ -148,9 +148,9 @@ To run this role, you can copy the molecule/default/converge.yml playbook and ad
     tags:
     - "labocbz.install_unattended_upgrades"
     vars:
-    unattended_upgrades_automatic_reboot: "{{ inv_unattended_upgrades_automatic_reboot }}"
-    unattended_upgrades_automatic_reboot_time: "{{ inv_unattended_upgrades_automatic_reboot_time }}"
-    unattended_upgrades_report_email_address: "{{ inv_unattended_upgrades_report_email_address }}"
+    install_unattended_upgrades_automatic_reboot: "{{ inv_install_unattended_upgrades_automatic_reboot }}"
+    install_unattended_upgrades_automatic_reboot_time: "{{ inv_install_unattended_upgrades_automatic_reboot_time }}"
+    install_unattended_upgrades_report_email_address: "{{ inv_install_unattended_upgrades_report_email_address }}"
     ansible.builtin.include_role:
     name: "labocbz.install_unattended_upgrades"
 ```

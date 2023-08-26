@@ -1,5 +1,5 @@
 ---
-unattended_upgrades_automatic_reboot: false
-unattended_upgrades_automatic_reboot_time: "06:00"
+install_unattended_upgrades_automatic_reboot: false
+install_unattended_upgrades_automatic_reboot_time: "06:00"
 
-unattended_upgrades_report_email_address: "your.address@domain.tld"
+install_unattended_upgrades_report_email_address: "your.address@domain.tld"
