@@ -23,7 +23,6 @@
 
     - name: "Check Unattended-Upgrades file 20auto-upgrades exists"
       register: file_check
-      failed_when: not file_check.stat.exists
       ansible.builtin.stat:
         path: "/etc/apt/apt.conf.d/20auto-upgrades"
 
