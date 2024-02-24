@@ -43,7 +43,7 @@
         line: "Unattended-Upgrade::Automatic-Reboot \"{{ install_unattended_upgrades__automatic_reboot }}\";"
         state: present
 
-    - name: "Configure updates runs at {{ install_unattended_upgrades__automatic_reboot_time }} AM"
+    - name: "Configure updates runs at {{ install_unattended_upgrades__automatic_reboot_time }}"
       ansible.builtin.lineinfile:
         path: "/etc/apt/apt.conf.d/50unattended-upgrades"
         line: "Unattended-Upgrade::Automatic-Reboot-Time \"{{ install_unattended_upgrades__automatic_reboot_time }}\";"
