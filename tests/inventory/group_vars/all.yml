@@ -1,0 +1,5 @@
+---
+inv_install_unattended_upgrades__automatic_reboot: false
+inv_install_unattended_upgrades__automatic_reboot_time: "06:00"
+
+inv_install_unattended_upgrades__report_email_address: "my.address@domain.tld"

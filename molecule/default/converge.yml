@@ -1,20 +1,14 @@
 ---
 - name: "Converge"
-  hosts: "all"
+  hosts: "local"
   tasks:
-    # replace these tasks with whatever you find suitable to test
-    - name: "Copy something to test use of synchronize module"
-      ansible.builtin.copy:
-        src: "/etc/hosts"
-        dest: "/tmp/hosts-from-controller"
-        mode: 0700
 
     - name: "Include labocbz.install_unattended_upgrades"
       tags:
         - "labocbz.install_unattended_upgrades"
       vars:
-        install_unattended_upgrades_automatic_reboot: "{{ inv_install_unattended_upgrades_automatic_reboot }}"
-        install_unattended_upgrades_automatic_reboot_time: "{{ inv_install_unattended_upgrades_automatic_reboot_time }}"
-        install_unattended_upgrades_report_email_address: "{{ inv_install_unattended_upgrades_report_email_address }}"
+        install_unattended_upgrades__automatic_reboot: "{{ inv_install_unattended_upgrades__automatic_reboot }}"
+        install_unattended_upgrades__automatic_reboot_time: "{{ inv_install_unattended_upgrades__automatic_reboot_time }}"
+        install_unattended_upgrades__report_email_address: "{{ inv_install_unattended_upgrades__report_email_address }}"
       ansible.builtin.include_role:
         name: "labocbz.install_unattended_upgrades"
