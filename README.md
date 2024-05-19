@@ -14,7 +14,6 @@
 
 An Ansible role to install an configure Unattended-upgrades on your host.
 
-
 The Ansible role for unattended upgrades installation automates the process of keeping your system up to date by applying critical and security updates without requiring manual intervention. This role utilizes a few variables to customize its behavior.
 
 By default, automatic reboot after updates is disabled, as indicated by the "install_unattended_upgrades__automatic_reboot" variable set to "false". This means that the system will not automatically restart after installing updates.
@@ -23,7 +22,7 @@ If you want to enable automatic reboot, you can change the value of the "install
 
 Additionally, if you choose to enable automatic reboot, you can specify the time at which the reboot should occur using the "install_unattended_upgrades__automatic_reboot_time" variable. In this example, the time is set to "06:00", indicating that the system will automatically restart at 6 AM.
 
-To receive reports on the updates performed by the role, you can provide an email address in the "install_unattended_upgrades__report_email_address" variable. In this example, the configured email address is "your.address@domain.tld". You will receive email notifications containing information about the applied updates.
+To receive reports on the updates performed by the role, you can provide an email address in the "install_unattended_upgrades__report_email_address" variable. In this example, the configured email address is "<your.address@domain.tld>". You will receive email notifications containing information about the applied updates.
 
 By using this Ansible role for unattended upgrades installation, you can easily keep your system up to date and secure by automating the update process and customizing its behavior according to your requirements.
 
@@ -174,6 +173,14 @@ Here you can put your change to keep a trace of your work and decisions.
 
 * Added support for new CI base
 * Edit all vars with __
+
+### 2024-05-19: New CI
+
+* Added Markdown lint to the CICD
+* Rework all Docker images
+* Change CICD vars convention
+* New workers
+* Removed all automation based on branch
 
 ## Authors
 
